@@ -25,20 +25,30 @@ export default class Todo extends VuexModule implements ITodoState {
 
 const fetchTasks = (): Promise<Task[]> => {
   return new Promise((resolve) => {
-    const dummyPosts: Task[] = [
+    const dummyTasks: Task[] = [
       {
-        id: 1,
-        text: 'Hello World'
+        taskId: 1,
+        taskListId: 1,
+        createdOn: new Date('2020-01-01T10:00:00'),
+        updatedOn: new Date('2020-01-01T10:00:00'),
+        text: '寝る',
+        deadline: new Date('2020-01-01T10:00:00'),
+        completed: false,
+        deleted: false,
+        priortyRank: 1
       },
       {
-        id: 2,
-        text: 'My Second Post'
-      },
-      {
-        id: 3,
-        text: 'Try Nuxt.js'
+        taskId: 2,
+        taskListId: 1,
+        createdOn: new Date('2020-01-01T10:00:00'),
+        updatedOn: new Date('2020-01-01T10:00:00'),
+        text: '寝る',
+        deadline: new Date('2020-01-01T10:00:00'),
+        completed: false,
+        deleted: false,
+        priortyRank: 1
       }
     ]
-    resolve(dummyPosts)
+    resolve(dummyTasks)
   })
 }
