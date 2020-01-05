@@ -14,16 +14,20 @@
     "test:e2e": "cross-env TEST=e2e ava --config e2e.config.js"
   },
   "dependencies": {
+    "ant-design-vue": "^1.1.10",
     "nuxt": "^2.0.0",
-    "ant-design-vue": "^1.1.10"
+    "vue-property-decorator": "latest"
   },
   "devDependencies": {
+    "@nuxt/typescript-build": "^0.5.5",
+    "@types/node": "^13.1.4",
     "@vue/test-utils": "^1.0.0-beta.27",
     "ava": "^2.2.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "browser-env": "^3.2.5",
     "require-extension-hooks": "^0.3.3",
     "require-extension-hooks-babel": "^1.0.0",
-    "require-extension-hooks-vue": "^2.0.0"
+    "require-extension-hooks-vue": "^2.0.0",
+    "vuex-module-decorators": "^0.11.0"
   }
 }
