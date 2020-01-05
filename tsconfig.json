@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "target": "es2018",
     "module": "esnext",
     "moduleResolution": "node",
@@ -26,7 +25,9 @@
     "types": [
       "@types/node",
       "@nuxt/types"
-    ]
+    ],
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   },
   "exclude": [
     "node_modules"

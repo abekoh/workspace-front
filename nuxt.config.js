@@ -29,7 +29,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '@/plugins/axios-accessor',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,8 +41,6 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: [
-  ],
   /*
   ** Build configuration
   */
@@ -49,7 +48,18 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    // extend (config, ctx) {
+    // }
+  },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+  axios: {
+  },
+  proxy: {
+    '/todo': {
+      target: 'http://localhost:8080/'
     }
   }
 }

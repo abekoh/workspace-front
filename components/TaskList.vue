@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TaskPreview v-for="task in tasks" :key="task.taskId" :task="task" />
+    <TaskPreview v-for="task in tasks" :key="task.taskId" :task="task"/>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
   import {Component, Vue} from 'vue-property-decorator'
   import {todoStore} from '~/store'
   import TaskPreview from "~/components/TaskPreview.vue"
+  import Task from "~/models/Task"
 
   @Component({
     components: {
@@ -24,7 +25,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

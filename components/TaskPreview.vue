@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ task.text }}</p>
+    <p> {{ task.text }} </p>
   </div>
 </template>
 
@@ -10,10 +10,6 @@
 
   @Component
   export default class TaskPreview extends Vue {
-    @Prop({type: Object, required: true}) task!: Task
+    @Prop({type: Object, required: true}) task: Task
   }
 </script>
-
-<style scoped>
-
-</style>
