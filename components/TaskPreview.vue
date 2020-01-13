@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card">
     <p> {{ task.text }} </p>
   </div>
 </template>
@@ -13,3 +13,9 @@
     @Prop({type: Object, required: true}) task: Task
   }
 </script>
+
+<style lang="scss">
+  .card {
+    background-color: #ffffff;
+  }
+</style>

@@ -59,7 +59,7 @@ export default {
   },
   proxy: {
     '/todo': {
-      target: 'http://localhost:8080/'
+      target: 'http://localhost:8080/api/v1/'
     }
   }
 }
