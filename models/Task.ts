@@ -7,5 +7,5 @@ export default interface Task {
   deadline: Date
   completed: boolean
   deleted: boolean
-  priortyRank: number
+  priorityRank: number
 }

@@ -1,6 +1,5 @@
 export default {
   require: ['./test/ava.setup.js'],
-  sources: ['**/*.{js,vue}'],
   babel: {
     testOptions: {
       plugins: [
@@ -18,5 +17,10 @@ export default {
     }
   },
   tap: true,
-  verbose: true
+  verbose: true,
+  typescript: {
+    rewritePaths: {
+      "src/": "test_build/"
+    }
+  }
 }

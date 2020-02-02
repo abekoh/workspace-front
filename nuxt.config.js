@@ -31,6 +31,7 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/axios-accessor',
+    {src: '@/plugins/vuedraggable', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules

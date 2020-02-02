@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
-    <p> {{ task.text }} </p>
-  </div>
+  <a-card class="card">
+    <p>{{ task.text }}</p>
+  </a-card>
 </template>
 
 <script lang="ts">
@@ -16,6 +16,8 @@
 
 <style lang="scss">
   .card {
-    background-color: #ffffff;
+    margin: 0px;
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.2));
+    width: 400px;
   }
 </style>

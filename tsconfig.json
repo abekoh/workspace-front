@@ -26,6 +26,10 @@
       "@types/node",
       "@nuxt/types"
     ],
+    "typeRoots": [
+      "@types",
+      "node_modules/@types"
+    ],
     "experimentalDecorators": true,
     "strictPropertyInitialization": false
   },
