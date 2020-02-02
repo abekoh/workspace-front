@@ -1,7 +1,5 @@
-import test from 'ava';
+const sum = (x, y) => x + y
 
-const fn = () => 'foo';
-
-test('fn() returns foo', t => {
-  t.is(fn(), 'foo');
-});
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3)
+})
