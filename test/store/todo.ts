@@ -1,20 +1,22 @@
-import {createLocalVue} from '@vue/test-utils'
+import {createLocalVue} from "@vue/test-utils"
 import Vuex from 'vuex'
-import Todo from '@/store/todo'
+import {todoStore} from "~/utils/store-accessor"
+import {cloneDeep} from "lodash"
+import Todo from "~/store/todo"
+import Task from "~/models/Task"
 
-const sum = (x, y) => x + y
+interface StoreType {
+  todo: Todo
+}
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3)
-})
-
-const localVue = createLocalVue()
-localVue.use(Vuex)
-
-test('todo.add', () => {
-  const state = {
-    tasks: [{taskId: 1}]
-  }
-  Todo.mutations.updateTasks(state)
-  expect(state.tasks).toBe(1)
-})
+// test('updateTasksFromUI', () => {
+//   const localVue = createLocalVue()
+//   localVue.use(Vuex)
+//
+//   const store = new Vuex.Store<StoreType>(
+//     {
+//       modules: {todo: Todo}
+//     }
+//   )
+//   expect(store.state.todo.addedTasks).toBe([])
+// })

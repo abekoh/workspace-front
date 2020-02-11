@@ -1,17 +1,14 @@
 <template>
-  <a-list itemLayout="horizontal" :dataSource="tasks" :split="false">
-    <a-list-item slot="renderItem" slot-scope="task">
-      <draggable @end="onEnd">
-        <TaskPreview :key="task.taskId" :task="task"/>
-      </draggable>
-    </a-list-item>
-  </a-list>
+  <draggable v-model="localTasks" @change="onChange">
+    <TaskPreview v-for="task in localTasks" :key="task.taskId" :task="task"/>
+  </draggable>
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator'
+  import {Component, PropSync, Vue} from 'vue-property-decorator'
   import {todoStore} from '~/store'
   import TaskPreview from "~/components/TaskPreview.vue"
+  import Task from "~/models/Task"
 
   @Component({
     components: {
@@ -19,16 +16,21 @@
     }
   })
   export default class TaskList extends Vue {
-    get tasks() {
-      return todoStore.tasks
+    get localTasks(): Task[] {
+      return todoStore.localTasks
+    }
+
+    set localTasks(newTasks: Task[]) {
+      todoStore.setLocalTasks(newTasks)
     }
 
     async created() {
-      await todoStore.loadTasks()
+      await todoStore.pullTasks()
     }
 
-    async onEnd() {
-      await todoStore.updatePriorityRank({curRank: 1, newRank: 3})
+    async onChange(evt: any) {
+      await todoStore.pushTasks()
+      await todoStore.pullTasks()
     }
   }
 </script>
