@@ -72,7 +72,7 @@ export default class Todo extends VuexModule implements ITodoState {
 
   @Action
   async pullTasks() {
-    const tasks: Task[] = await $axios.$get('/todo/tasks')
+    const tasks: Task[] = await $axios.$get<Task[]>('/todo/tasks')
     this.setLocalTasks(tasks)
     this.setRemoteTasks(tasks)
   }
