@@ -21,13 +21,6 @@ export default class Todo extends VuexModule implements ITodoState {
   }
 
   @Mutation
-  setLocalTask(updatedLocalTask: Task) {
-    console.log(updatedLocalTask)
-    const targetIndex = this.localTasks.findIndex(localTask => localTask.taskId === updatedLocalTask.taskId)
-    this.localTasks[targetIndex] = updatedLocalTask
-  }
-
-  @Mutation
   setRemoteTasks(updatedRemoteTasks: Task[]) {
     this.remoteTasks = updatedRemoteTasks
   }
