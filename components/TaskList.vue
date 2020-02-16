@@ -1,8 +1,11 @@
 <template>
   <!--  <draggable v-model="localTasks" @change="onChange">-->
-  <draggable v-model="localTasks" @change="onChange">
-    <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
-                 @update-local-task="updateOneLocalTask($event, index)"/>
+  <draggable v-model="localTasks" @change="onChange"
+             v-bind="{animation: 200, group: 'description', disabled: false, ghostClass: 'ghost'}">
+    <transition-group type="transition" name="flip-list">
+      <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
+                   @update-local-task="updateOneLocalTask($event, index)"/>
+    </transition-group>
   </draggable>
 </template>
 
@@ -20,6 +23,7 @@
     }
   })
   export default class TaskList extends Vue {
+
     get pushRequest(): boolean {
       return todoStore.pushRequest
     }
@@ -66,4 +70,11 @@
 </script>
 
 <style lang="scss">
+  .flip-list-move {
+    transition: transform 0.3s;
+  }
+
+  .no-move {
+    transition: transform 0s;
+  }
 </style>
