@@ -1,14 +1,18 @@
 <template>
+  <!--  <draggable v-model="localTasks" @change="onChange">-->
   <draggable v-model="localTasks" @change="onChange">
-    <TaskPreview v-for="task in localTasks" :key="task.taskId" :task="task"/>
+    <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
+                 @update-local-task="updateOneLocalTask($event, index)"/>
   </draggable>
 </template>
 
 <script lang="ts">
   import {Component, PropSync, Vue} from 'vue-property-decorator'
   import {todoStore} from '~/store'
-  import TaskPreview from "~/components/TaskPreview.vue"
   import Task from "~/models/Task"
+  import TaskPreview from "~/components/TaskPreview.vue"
+  import _ from 'lodash'
+
 
   @Component({
     components: {
@@ -21,6 +25,12 @@
     }
 
     set localTasks(newTasks: Task[]) {
+      todoStore.setLocalTasks(newTasks)
+    }
+
+    updateOneLocalTask(task: Task, index: number) {
+      let newTasks: Task[] = _.cloneDeep(this.localTasks)
+      newTasks[index] = task
       todoStore.setLocalTasks(newTasks)
     }
 

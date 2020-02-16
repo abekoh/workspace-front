@@ -1,16 +1,24 @@
 <template>
   <a-card class="card">
-    <p>{{ task.text }}</p>
+    <a-textarea :value="task.text" @change="updateLocalTask"/>
   </a-card>
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from "vue-property-decorator"
+  import {Component, Emit, Prop, PropSync, Vue} from "vue-property-decorator"
   import Task from "~/models/Task"
+  import _ from 'lodash'
 
   @Component
   export default class TaskPreview extends Vue {
     @Prop({type: Object, required: true}) task: Task
+
+    @Emit()
+    updateLocalTask(evt: any) {
+      let newTask: Task = _.cloneDeep(this.task)
+      newTask.text = evt.target.value
+      return newTask
+    }
   }
 </script>
 

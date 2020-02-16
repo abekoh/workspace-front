@@ -6,13 +6,13 @@ import axios from 'axios'
 
 const sampleTask: Task = {
   completed: false,
-  createdOn: undefined,
-  deadline: undefined,
+  createdOn: new Date(),
+  deadline: new Date(),
   deleted: false,
   priorityRank: 0,
   taskListId: 0,
   text: "",
-  updatedOn: undefined,
+  updatedOn: new Date(),
   taskId: 1
 }
 
