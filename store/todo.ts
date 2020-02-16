@@ -8,12 +8,19 @@ const _ = lodash
 export interface ITodoState {
   localTasks: Task[]
   remoteTasks: Task[]
+  pushRequest: boolean
 }
 
 @Module({stateFactory: true, namespaced: true, name: 'todo'})
 export default class Todo extends VuexModule implements ITodoState {
   localTasks: Task[] = []
   remoteTasks: Task[] = []
+  pushRequest: boolean = false
+
+  @Mutation
+  setPushRequest(flg: boolean) {
+    this.pushRequest = flg
+  }
 
   @Mutation
   setLocalTasks(updatedLocalTasks: Task[]) {
@@ -27,7 +34,6 @@ export default class Todo extends VuexModule implements ITodoState {
 
   @Action
   async pushTasks() {
-
     let newTasks: Task[] = _.cloneDeep(this.localTasks)
     let oldTasks: Task[] = _.cloneDeep(this.remoteTasks)
 

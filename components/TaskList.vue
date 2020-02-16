@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-  import {Component, PropSync, Vue} from 'vue-property-decorator'
+  import {Component, PropSync, Vue, Watch} from 'vue-property-decorator'
   import {todoStore} from '~/store'
   import Task from "~/models/Task"
   import TaskPreview from "~/components/TaskPreview.vue"
@@ -20,6 +20,14 @@
     }
   })
   export default class TaskList extends Vue {
+    get pushRequest(): boolean {
+      return todoStore.pushRequest
+    }
+
+    set pushRequest(flg: boolean) {
+      todoStore.setPushRequest(flg)
+    }
+
     get localTasks(): Task[] {
       return todoStore.localTasks
     }
@@ -32,6 +40,7 @@
       let newTasks: Task[] = _.cloneDeep(this.localTasks)
       newTasks[index] = task
       todoStore.setLocalTasks(newTasks)
+      this.pushRequest = true
     }
 
     async created() {
@@ -39,9 +48,20 @@
     }
 
     async onChange(evt: any) {
-      await todoStore.pushTasks()
-      await todoStore.pullTasks()
+      this.pushRequest = true
     }
+
+    @Watch('pushRequest')
+    watchPushRequest() {
+      if (!this.pushRequest) return
+      setTimeout(async () => {
+        await todoStore.pushTasks()
+        await todoStore.pullTasks()
+        this.pushRequest = false
+        console.log('sync tasks at ' + new Date())
+      }, 3000)
+    }
+
   }
 </script>
 
