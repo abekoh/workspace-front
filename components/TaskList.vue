@@ -76,6 +76,7 @@
     isHoveredBottom: boolean = false
     isMoving: boolean = false
     isShownSide: boolean = false
+    moveFromX: number = -1
 
     get localTasks(): Task[] {
       return todoStore.localTasks
@@ -124,17 +125,33 @@
       this.pushRequest = true
     }
 
+    removeOneLocalTask(index: number) {
+      let newTasks: Task[] = _.cloneDeep(this.localTasks)
+      newTasks.splice(index, 1)
+      this.localTasks = newTasks
+      this.pushRequest = true
+    }
+
     async created() {
       await todoStore.pullTasks()
     }
 
     onStart(evt: any) {
+      this.moveFromX = evt.originalEvent.pageX
       this.isMoving = true
     }
 
     onEnd(evt: any) {
       this.isMoving = false
       this.isShownSide = false
+      const moveToX = evt.originalEvent.pageX
+      if (evt.oldIndex !== evt.newIndex) {
+        return
+      }
+      // 100px以上横に動かす
+      if (Math.abs(this.moveFromX - moveToX) > 100) {
+        this.removeOneLocalTask(evt.newIndex)
+      }
     }
 
     async onChange(evt: any) {
@@ -156,8 +173,7 @@
     watchIsMoving() {
       if (!this.isMoving) return
       setTimeout(() => {
-        if (!this.isMoving) return
-        this.isShownSide = true
+        this.isShownSide = this.isMoving
       }, 600)
     }
 
@@ -231,51 +247,4 @@
       opacity: 0;
     }
   }
-
-  /*.container {*/
-  /*  text-align: center;*/
-  /*  display: flex;*/
-  /*  flex-direction: column;*/
-  /*  width: 800px;*/
-
-  /*  .add {*/
-  /*    .add-field {*/
-  /*      width: 100%;*/
-  /*      height: 30px;*/
-
-  /*      .add-button {*/
-  /*        width: 100%;*/
-  /*        height: 100%;*/
-  /*        border-radius: 0px;*/
-  /*      }*/
-
-  /*      .add-button-enter-active, .add-button-leave-active {*/
-  /*        transition: opacity .5s;*/
-  /*      }*/
-
-  /*      .add-button-enter, .add-button-leave-to {*/
-  /*        opacity: 0;*/
-  /*      }*/
-  /*    }*/
-  /*  }*/
-
-  /*  .list {*/
-  /*    text-align: center;*/
-  /*    display: inline-block;*/
-  /*    margin: auto;*/
-  /*  }*/
-
-  /*  .done {*/
-  /*    border: 1px solid #3b8070;*/
-  /*  }*/
-
-
-  /*  .flip-list-move {*/
-  /*    transition: transform 0.3s;*/
-  /*  }*/
-
-  /*  .no-move {*/
-  /*    transition: transform 0s;*/
-  /*  }*/
-  /*}*/
 </style>
