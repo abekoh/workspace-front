@@ -35,7 +35,7 @@
 
 <style lang="scss">
   .card {
-    margin: 10px;
+    margin: 5px auto;
     width: 100%;
     display: inline-block;
 

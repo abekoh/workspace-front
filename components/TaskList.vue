@@ -1,18 +1,25 @@
 <template>
   <div class="container">
-    <a-row class="add">
-      <div class="add-field" @mouseover="isAddHovered = true" @mouseleave="isAddHovered = false">
-        <transition name="add-button">
-          <a-button @click="addOneLocalTask(true)" v-show="isAddHovered" class="add-button" type="dashed" icon="plus"/>
-        </transition>
-      </div>
+    <a-row class="top">
+      <a-col :span="6"/>
+      <a-col :span="12">
+        <div class="center-space" @mouseover="isHoveredTop = true" @mouseleave="isHoveredTop = false">
+          <transition name="trans">
+            <a-button @click="addOneLocalTask(true)" v-show="isHoveredTop" class="add-button" type="dashed"
+                      icon="plus"/>
+          </transition>
+        </div>
+      </a-col>
+      <a-col :span="6"/>
     </a-row>
-    <a-row>
-      <a-col :span="6"></a-col>
+    <a-row class="middle">
+      <a-col :span="6">
+        <div class="left-side"></div>
+      </a-col>
       <a-col :span="12">
         <div class="list">
-          <draggable v-model="localTasks" @change="onChange" @end="onMove"
-                     v-bind="{animation: 200, group: 'description', disabled: false, ghostClass: 'ghost'}">
+          <draggable v-model="localTasks" @change="onChange"
+                     v-bind="{animation: 200, group: 'description'}">
             <transition-group type="transition" name="flip-list">
               <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
                            @update-local-task="updateOneLocalTask($event, index)"/>
@@ -21,15 +28,20 @@
         </div>
       </a-col>
       <a-col :span="6">
-        <div class="done"></div>
+        <div class="left-side"></div>
       </a-col>
     </a-row>
-    <a-row class="add">
-      <div class="add-field" @mouseover="isAddHovered = true" @mouseleave="isAddHovered = false">
-        <transition name="add-button">
-          <a-button @click="addOneLocalTask(false)" v-show="isAddHovered" class="add-button" type="dashed" icon="plus"/>
-        </transition>
-      </div>
+    <a-row class="bottom">
+      <a-col :span="6"/>
+      <a-col :span="12">
+        <div class="center-space" @mouseover="isHoveredBottom = true" @mouseleave="isHoveredBottom = false">
+          <transition name="trans">
+            <a-button @click="addOneLocalTask(false)" v-show="isHoveredBottom" class="add-button" type="dashed"
+                      icon="plus"/>
+          </transition>
+        </div>
+      </a-col>
+      <a-col :span="6"/>
     </a-row>
   </div>
 </template>
@@ -48,7 +60,8 @@
     }
   })
   export default class TaskList extends Vue {
-    isAddHovered: boolean = false
+    isHoveredTop: boolean = false
+    isHoveredBottom: boolean = false
 
     get localTasks(): Task[] {
       return todoStore.localTasks
@@ -125,48 +138,112 @@
 
 <style lang="scss">
   .container {
-    display: flex;
+    text-align: center;
     flex-direction: column;
     width: 800px;
 
-    .add {
-      .add-field {
+    .top {
+      width: 100%;
+
+      .center-space {
         width: 100%;
-        height: 30px;
+        height: 50px;
 
         .add-button {
           width: 100%;
           height: 100%;
-          border-radius: 0px;
         }
 
-        .add-button-enter-active, .add-button-leave-active {
-          transition: opacity .5s;
-        }
+      }
+    }
 
-        .add-button-enter, .add-button-leave-to {
-          opacity: 0;
+    .middle {
+      display: flex;
+      width: 100%;
+
+      .left-side {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #3b8070;
+      }
+
+      .list {
+      }
+
+      .right-side {
+        align-items: stretch;
+        width: 100%;
+        border: 1px solid #3b8070;
+      }
+    }
+
+    .bottom {
+      width: 100%;
+
+      .center-space {
+        width: 100%;
+        height: 50px;
+
+        .add-button {
+          width: 100%;
+          height: 50px;
         }
       }
     }
 
-    .list {
-      text-align: center;
-      display: inline-block;
-      margin: auto;
+    .trans-enter-active, .trans-leave-active {
+      transition: opacity .5s;
     }
 
-    .done {
-      border: 1px solid #3b8070;
-    }
-
-
-    .flip-list-move {
-      transition: transform 0.3s;
-    }
-
-    .no-move {
-      transition: transform 0s;
+    .trans-enter, .trans-leave-to {
+      opacity: 0;
     }
   }
+
+  /*.container {*/
+  /*  text-align: center;*/
+  /*  display: flex;*/
+  /*  flex-direction: column;*/
+  /*  width: 800px;*/
+
+  /*  .add {*/
+  /*    .add-field {*/
+  /*      width: 100%;*/
+  /*      height: 30px;*/
+
+  /*      .add-button {*/
+  /*        width: 100%;*/
+  /*        height: 100%;*/
+  /*        border-radius: 0px;*/
+  /*      }*/
+
+  /*      .add-button-enter-active, .add-button-leave-active {*/
+  /*        transition: opacity .5s;*/
+  /*      }*/
+
+  /*      .add-button-enter, .add-button-leave-to {*/
+  /*        opacity: 0;*/
+  /*      }*/
+  /*    }*/
+  /*  }*/
+
+  /*  .list {*/
+  /*    text-align: center;*/
+  /*    display: inline-block;*/
+  /*    margin: auto;*/
+  /*  }*/
+
+  /*  .done {*/
+  /*    border: 1px solid #3b8070;*/
+  /*  }*/
+
+
+  /*  .flip-list-move {*/
+  /*    transition: transform 0.3s;*/
+  /*  }*/
+
+  /*  .no-move {*/
+  /*    transition: transform 0s;*/
+  /*  }*/
+  /*}*/
 </style>
