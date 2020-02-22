@@ -240,7 +240,7 @@
     }
 
     .trans-enter-active, .trans-leave-active {
-      transition: opacity .5s;
+      transition: opacity .3s;
     }
 
     .trans-enter, .trans-leave-to {

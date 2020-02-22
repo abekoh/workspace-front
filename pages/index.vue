@@ -21,11 +21,10 @@
 
 <style>
   .container {
-    margin: 0 auto;
+    margin: 10px auto;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
   }
 </style>
