@@ -14,11 +14,17 @@
     </a-row>
     <a-row class="middle">
       <a-col :span="6">
-        <div class="left-side"></div>
+        <div class="side">
+          <transition name="trans">
+            <div v-show="isShownSide" class="side-box">
+              <a-icon class="side-icon" style="margin: auto" type="delete"/>
+            </div>
+          </transition>
+        </div>
       </a-col>
       <a-col :span="12">
         <div class="list">
-          <draggable v-model="localTasks" @change="onChange"
+          <draggable v-model="localTasks" @change="onChange" @start="onStart" @end="onEnd"
                      v-bind="{animation: 200, group: 'description'}">
             <transition-group type="transition" name="flip-list">
               <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
@@ -28,7 +34,13 @@
         </div>
       </a-col>
       <a-col :span="6">
-        <div class="left-side"></div>
+        <div class="side">
+          <transition name="trans">
+            <div v-show="isShownSide" class="side-box">
+              <a-icon class="side-icon" style="margin: auto" type="check"/>
+            </div>
+          </transition>
+        </div>
       </a-col>
     </a-row>
     <a-row class="bottom">
@@ -62,6 +74,8 @@
   export default class TaskList extends Vue {
     isHoveredTop: boolean = false
     isHoveredBottom: boolean = false
+    isMoving: boolean = false
+    isShownSide: boolean = false
 
     get localTasks(): Task[] {
       return todoStore.localTasks
@@ -114,12 +128,17 @@
       await todoStore.pullTasks()
     }
 
-    async onChange(evt: any) {
-      this.pushRequest = true
+    onStart(evt: any) {
+      this.isMoving = true
     }
 
-    onMove(evt: any) {
-      console.log(evt)
+    onEnd(evt: any) {
+      this.isMoving = false
+      this.isShownSide = false
+    }
+
+    async onChange(evt: any) {
+      this.pushRequest = true
     }
 
     @Watch('pushRequest')
@@ -131,6 +150,15 @@
         this.pushRequest = false
         console.log('sync tasks at ' + new Date())
       }, 3000)
+    }
+
+    @Watch('isMoving')
+    watchIsMoving() {
+      if (!this.isMoving) return
+      setTimeout(() => {
+        if (!this.isMoving) return
+        this.isShownSide = true
+      }, 600)
     }
 
   }
@@ -161,20 +189,24 @@
       display: flex;
       width: 100%;
 
-      .left-side {
-        width: 100%;
+      .side {
         height: 100%;
-        border: 1px solid #3b8070;
+        margin: 0 10px;
+
+        .side-box {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          border: 1px dashed #1890ff;
+          border-radius: 4px;
+
+          .side-icon {
+            font-size: 30px;
+            color: #1890ff;
+          }
+        }
       }
 
-      .list {
-      }
-
-      .right-side {
-        align-items: stretch;
-        width: 100%;
-        border: 1px solid #3b8070;
-      }
     }
 
     .bottom {

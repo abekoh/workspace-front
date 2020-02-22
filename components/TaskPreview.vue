@@ -38,6 +38,7 @@
     margin: 5px auto;
     width: 100%;
     display: inline-block;
+    border-radius: 4px;
 
     .ant-card-body {
       padding: 10px;
