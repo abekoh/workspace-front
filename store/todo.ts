@@ -82,14 +82,4 @@ export default class Todo extends VuexModule implements ITodoState {
     this.setLocalTasks(tasks)
     this.setRemoteTasks(tasks)
   }
-
-  // @Action
-  // async syncTasks() {
-  //   let patchPromises: Promise<number>[] = []
-  //   this.modifiedTasks.forEach((modifiedTask) => {
-  //     patchPromises.push($axios.$patch('/todo/tasks/' + modifiedTask.taskId, modifiedTask))
-  //   })
-  //   await Promise.all(patchPromises)
-  //   this.loadTasks()
-  // }
 }
