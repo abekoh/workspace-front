@@ -36,8 +36,8 @@
 <style lang="scss">
   .card {
     margin: 10px;
-    /*filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.2));*/
-    width: 400px;
+    width: 100%;
+    display: inline-block;
 
     .ant-card-body {
       padding: 10px;

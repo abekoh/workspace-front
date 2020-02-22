@@ -7,14 +7,22 @@
         </transition>
       </div>
     </a-row>
-    <a-row class="list">
-      <draggable v-model="localTasks" @change="onChange"
-                 v-bind="{animation: 200, group: 'description', disabled: false, ghostClass: 'ghost'}">
-        <transition-group type="transition" name="flip-list">
-          <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
-                       @update-local-task="updateOneLocalTask($event, index)"/>
-        </transition-group>
-      </draggable>
+    <a-row>
+      <a-col :span="6"></a-col>
+      <a-col :span="12">
+        <div class="list">
+          <draggable v-model="localTasks" @change="onChange" @end="onMove"
+                     v-bind="{animation: 200, group: 'description', disabled: false, ghostClass: 'ghost'}">
+            <transition-group type="transition" name="flip-list">
+              <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
+                           @update-local-task="updateOneLocalTask($event, index)"/>
+            </transition-group>
+          </draggable>
+        </div>
+      </a-col>
+      <a-col :span="6">
+        <div class="done"></div>
+      </a-col>
     </a-row>
     <a-row class="add">
       <div class="add-field" @mouseover="isAddHovered = true" @mouseleave="isAddHovered = false">
@@ -97,6 +105,10 @@
       this.pushRequest = true
     }
 
+    onMove(evt: any) {
+      console.log(evt)
+    }
+
     @Watch('pushRequest')
     watchPushRequest() {
       if (!this.pushRequest) return
@@ -115,11 +127,11 @@
   .container {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 800px;
 
     .add {
       .add-field {
-        width: 400px;
+        width: 100%;
         height: 30px;
 
         .add-button {
@@ -136,6 +148,16 @@
           opacity: 0;
         }
       }
+    }
+
+    .list {
+      text-align: center;
+      display: inline-block;
+      margin: auto;
+    }
+
+    .done {
+      border: 1px solid #3b8070;
     }
 
 
