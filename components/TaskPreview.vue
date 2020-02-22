@@ -36,11 +36,11 @@
 <style lang="scss">
   .card {
     margin: 10px;
-    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.2));
+    /*filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.2));*/
     width: 400px;
 
     .ant-card-body {
-      padding: 8px;
+      padding: 10px;
     }
   }
 
@@ -58,7 +58,6 @@
 
     .ant-input:focus {
       border: none;
-      /*outline: none;*/
       box-shadow: none;
     }
   }

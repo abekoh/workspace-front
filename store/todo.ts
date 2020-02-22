@@ -16,6 +16,12 @@ export default class Todo extends VuexModule implements ITodoState {
   localTasks: Task[] = []
   remoteTasks: Task[] = []
   pushRequest: boolean = false
+  nextTaskId: number = -1
+
+  @Mutation
+  setNextTaskId(nextTaskId: number) {
+    this.nextTaskId = nextTaskId
+  }
 
   @Mutation
   setPushRequest(flg: boolean) {
@@ -53,7 +59,7 @@ export default class Todo extends VuexModule implements ITodoState {
         deletedTasks.push(oldTask)
       }
     })
-    oldTasks.filter(oldTask => deletedTasks.indexOf(oldTask) < 0)
+    oldTasks = oldTasks.filter(oldTask => deletedTasks.indexOf(oldTask) < 0)
 
     // 追加したタスク抽出
     let addedTasks: Task[] = []
@@ -64,7 +70,7 @@ export default class Todo extends VuexModule implements ITodoState {
         addedTasks.push(newTask)
       }
     })
-    newTasks.filter(newTask => addedTasks.indexOf(newTask) < 0)
+    newTasks = newTasks.filter(newTask => addedTasks.indexOf(newTask) < 0)
 
     // 変更したタスク抽出
     newTasks.forEach((localTask, index) => {
@@ -81,5 +87,7 @@ export default class Todo extends VuexModule implements ITodoState {
     const tasks: Task[] = await $axios.$get<Task[]>('/todo/tasks')
     this.setLocalTasks(tasks)
     this.setRemoteTasks(tasks)
+    const nextTaskId: number = await $axios.$get('/todo/nextTaskId')
+    this.setNextTaskId(nextTaskId)
   }
 }
