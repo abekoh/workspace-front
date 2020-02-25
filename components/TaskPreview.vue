@@ -1,7 +1,8 @@
 <template>
   <a-card class="card">
     <div class="text">
-      <a-textarea :value="task.text" @change="updateLocalTask" autosize/>
+<!--      <a-textarea :value="task.text" @change="updateLocalTask" autosize/>-->
+      <codemirror :value="task.text"/>
     </div>
     <p class="deadline" v-if="task.deadline">
       {{ formatDate(task.deadline) }}
