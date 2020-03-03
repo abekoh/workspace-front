@@ -1,3 +1,3 @@
 module.exports = {
-  apiBaseUrl: 'http://backend:9000/api/v1/'
+  apiBaseUrl: 'http://backend:8080/api/v1/'
 }
