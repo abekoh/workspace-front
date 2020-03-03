@@ -7,8 +7,10 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
+    "build:compose": "cross-env NODE_ENV=\"compose\" nuxt build",
     "build:prod": "cross-env NODE_ENV=\"production\" nuxt build",
     "start": "nuxt start",
+    "start:compose": "cross-env NODE_ENV=\"compose\" nuxt start",
     "start:prod": "cross-env NODE_ENV=\"production\" nuxt start",
     "generate": "nuxt generate",
     "test": "jest"

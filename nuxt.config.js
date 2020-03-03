@@ -3,6 +3,7 @@ const envSet = require(`./env.${environment}.js`);
 
 export default {
   mode: 'universal',
+  env: envSet,
   /*
   ** Headers of the page
   */
@@ -62,7 +63,7 @@ export default {
   },
   proxy: {
     '/todo': {
-      target: envSet.apiBaseUrl
+      target: `${envSet.apiBaseUrl}`
     }
   }
 }
