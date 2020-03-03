@@ -25,15 +25,15 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "@types/jest",
-      "@types/chalk"
+      "@types/jest"
     ],
     "typeRoots": [
       "@types",
       "node_modules/@types"
     ],
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "noImplicitAny": true
   },
   "exclude": [
     "node_modules"
