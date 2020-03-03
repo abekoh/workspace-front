@@ -10,8 +10,8 @@
     "build:compose": "cross-env NODE_ENV=\"compose\" nuxt build",
     "build:prod": "cross-env NODE_ENV=\"production\" nuxt build",
     "start": "nuxt start",
-    "start:compose": "cross-env NODE_ENV=\"compose\" nuxt start",
-    "start:prod": "cross-env NODE_ENV=\"production\" nuxt start",
+    "start:compose": "cross-env NODE_ENV=\"compose\" nuxt start --spa",
+    "start:prod": "cross-env NODE_ENV=\"production\" nuxt start --spa",
     "generate": "nuxt generate",
     "test": "jest"
   },
