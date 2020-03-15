@@ -2,7 +2,7 @@ const environment = process.env.NODE_ENV || 'development';
 const envSet = require(`./env.${environment}.js`);
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   env: envSet,
   /*
   ** Headers of the page
@@ -60,6 +60,7 @@ export default {
     '@nuxtjs/proxy'
   ],
   axios: {
+    proxy: true
   },
   proxy: {
     '/todo': {

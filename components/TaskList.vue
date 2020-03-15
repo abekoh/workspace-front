@@ -24,15 +24,13 @@
       </a-col>
       <a-col :span="12">
         <div class="list">
-          <no-ssr>
-            <draggable v-model="localTasks" @change="onChange" @start="onStart" @end="onEnd"
-                       v-bind="{animation: 200, group: 'description'}">
-              <transition-group type="transition" name="flip-list">
-                <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
-                             @update-local-task="updateOneLocalTask($event, index)"/>
-              </transition-group>
-            </draggable>
-          </no-ssr>
+          <draggable v-model="localTasks" @change="onChange" @start="onStart" @end="onEnd"
+                     v-bind="{animation: 200, group: 'description'}">
+            <transition-group type="transition" name="flip-list">
+              <TaskPreview v-for="(task, index) in localTasks" :key="task.taskId" :task="task"
+                           @update-local-task="updateOneLocalTask($event, index)"/>
+            </transition-group>
+          </draggable>
         </div>
       </a-col>
       <a-col :span="6">
