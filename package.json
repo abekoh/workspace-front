@@ -21,7 +21,7 @@
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.149",
     "ant-design-vue": "^1.1.10",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "cross-env": "^7.0.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
